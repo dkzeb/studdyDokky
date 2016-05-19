@@ -26,7 +26,7 @@
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Ryd alt data"
+        android:text="Ryd al data nu"
         android:id="@+id/button4"
         android:layout_alignParentBottom="true"/>
 </RelativeLayout>

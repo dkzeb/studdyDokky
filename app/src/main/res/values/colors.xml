@@ -1,6 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#26547A</color>
+    <color name="colorPrimaryDark">#153F62</color>
+    <color name="colorAccent">#26547A</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="creme_white">#FCFBE3</color>
+    <color name="grey">#CFCFCF</color>
+
+    <color name="dokk1_lighter_blue">#6488A6</color>
+    <color name="dokk1_light_blue">#3F698C</color>
+    <color name="dokk1_blue">#26547A</color>
+    <color name="dokk1_dark_blue">#153F62</color>
+    <color name="dokk1_darker_blue">#052946</color>
+
+    <color name="dokk1_lighter_purple">#323184</color>
+    <color name="dokk1_light_purple">#7473B4</color>
+    <color name="dokk1_purple">#4C4B97</color>
+    <color name="dokk1_dark_purple">#1F1D6A</color>
+    <color name="dokk1_darker_purple">#0C0B4C</color>
+
+    <color name="dokk1_lighter_orange">#BD9B31</color>
+    <color name="dokk1_light_orange">#FFE493</color>
+    <color name="dokk1_orange">#D8B958</color>
+    <color name="dokk1_dark_orange">#977817</color>
+    <color name="dokk1_darker_orange">#6D5200</color>
+
+    <color name="dokk1_lighter_compl">#BD8231</color>
+    <color name="dokk1_light_compl">#FFD193</color>
+    <color name="dokk1_compl">#D8A258</color>
+    <color name="dokk1_dark_compl">#976117</color>
+    <color name="dokk1_darker_compl">#6D3F00</color>
+
+    <color name="dokk1_button_blue">#003764</color>
 </resources>

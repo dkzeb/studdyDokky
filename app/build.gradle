@@ -20,9 +20,20 @@ android {
 }
 
 dependencies {
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.davemorrissey.labs:subsampling-scale-image-view:3.5.0'
+    compile 'com.indooratlas.android:indooratlas-android-sdk:2.1.2@aar'
+}
+repositories{
+    maven {
+        url "http://indooratlas-ltd.bintray.com/mvn-public"
+    }
+}
+dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile project(':libs:SlidingMenuLibrary')
 
+    compile 'com.google.android.gms:play-services-appindexing:8.1.0'
 }

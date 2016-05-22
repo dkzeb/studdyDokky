@@ -10,10 +10,20 @@
     tools:context="dk.teamawesome.studdydokky.StuddyDokkyMap"
     android:background="@color/dokk1_darker_blue">
 
+    <!-- til live map!
     <dk.teamawesome.studdydokky.BlueDotView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:id="@+id/floorPlanImage"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true" /> -->
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/map_image"
+        android:src="@drawable/base_map"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>

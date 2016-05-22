@@ -14,7 +14,7 @@ import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
  */
 public class BlueDotView extends SubsamplingScaleImageView {
 
-    private float radius = 1.0f;
+    private float radius = 0.5f;
     private PointF dotCenter = null;
 
     public void setRadius(float radius) {

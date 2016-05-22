@@ -44,10 +44,10 @@ import java.util.logging.Logger;
 
 public class StuddyDokkyMap extends AppCompatActivity {
 
-    private static final String TAG = "IndoorAtlasExample";
+    private static final String TAG = "Studdy Dokky";
 
     // blue dot radius in meters
-    private static final float dotRadius = 1.0f;
+    private static final float dotRadius = 0.5f;
 
     private IALocationManager mIALocationManager;
     private IAResourceManager mFloorPlanManager;
@@ -57,10 +57,12 @@ public class StuddyDokkyMap extends AppCompatActivity {
     private long mDownloadId;
     private DownloadManager mDownloadManager;
 
+    private IALatLng mLatLng;
 
     private IALocationListener mLocationListener = new IALocationListenerSupport() {
         @Override
         public void onLocationChanged(IALocation location) {
+
             Log.d(TAG, "location is: " + location.getLatitude() + "," + location.getLongitude());
             if (mImageView != null && mImageView.isReady()) {
                 IALatLng latLng = new IALatLng(location.getLatitude(), location.getLongitude());
@@ -75,10 +77,22 @@ public class StuddyDokkyMap extends AppCompatActivity {
 
         @Override
         public void onEnterRegion(IARegion region) {
-            if (region.getType() == IARegion.TYPE_FLOOR_PLAN) {
+
+            ImageView map_image = (ImageView) findViewById(R.id.map_image);
+
+
+            if (region.getType() == IARegion.TYPE_FLOOR_PLAN && map_image != null) {
                 String id = region.getId();
                 Log.d(TAG, "floorPlan changed to " + id);
-                Toast.makeText(StuddyDokkyMap.this, id, Toast.LENGTH_SHORT).show();
+                if(id.equals(R.string.stuen_id)){
+                    map_image.setImageResource(R.drawable.stuen_aktiv);
+                } else if(id.equals(R.string.toilet_gang_id)){
+                    map_image.setImageResource(R.drawable.gangtoilet_aktiv);
+                } else {
+                    map_image.setImageResource(R.drawable.base_map);
+                }
+                //Toast.makeText(StuddyDokkyMap.this, id, Toast.LENGTH_SHORT).show();
+
                 fetchFloorPlan(id);
             }
         }
@@ -103,7 +117,6 @@ public class StuddyDokkyMap extends AppCompatActivity {
 
 
         // logo
-
         ActionBar actionBar = getSupportActionBar();
         if(actionBar != null){
             actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_HOME | ActionBar.DISPLAY_SHOW_TITLE);
@@ -111,8 +124,8 @@ public class StuddyDokkyMap extends AppCompatActivity {
             actionBar.setDisplayUseLogoEnabled(true);
             actionBar.setLogo(R.drawable.studiedokk1_logo_transparent_white);
         }
-        // Menu - slider fra siden :D whey
 
+        // Menu - slider fra siden :D whey
         SlidingMenu menu = new SlidingMenu(this);
         menu.setMode(SlidingMenu.LEFT);
         menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
@@ -126,7 +139,7 @@ public class StuddyDokkyMap extends AppCompatActivity {
         // IndoorAtlas
         findViewById(android.R.id.content).setKeepScreenOn(true);
 
-        mImageView = (BlueDotView) findViewById(R.id.floorPlanImage);
+        //mImageView = (BlueDotView) findViewById(R.id.floorPlanImage);
 
         mDownloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
         mIALocationManager = IALocationManager.create(this);
@@ -138,7 +151,7 @@ public class StuddyDokkyMap extends AppCompatActivity {
         final String floorPlanId = getString(R.string.floorplan_id);
         if (!TextUtils.isEmpty(floorPlanId)) {
             final IALocation location = IALocation.from(IARegion.floorPlan(floorPlanId));
-            mIALocationManager.setLocation(location);
+            //mIALocationManager.setLocation(location);
         }
 
     }
@@ -184,7 +197,7 @@ public class StuddyDokkyMap extends AppCompatActivity {
     private BroadcastReceiver onComplete = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            long id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, 0L);
+            /*long id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, 0L);
             if (id != mDownloadId) {
                 Log.w(TAG, "Ignore unrelated download");
                 return;
@@ -204,14 +217,14 @@ public class StuddyDokkyMap extends AppCompatActivity {
                     showFloorPlanImage(filePath);
                 }
             }
-            c.close();
+            c.close();*/
         }
     };
 
     private void showFloorPlanImage(String filePath) {
         Log.w(TAG, "showFloorPlanImage: " + filePath);
-        mImageView.setRadius(mFloorPlan.getMetersToPixels() * dotRadius);
-        mImageView.setImage(ImageSource.uri(filePath));
+        //mImageView.setRadius(mFloorPlan.getMetersToPixels() * dotRadius);
+        //mImageView.setImage(ImageSource.uri(filePath));
     }
 
     /**
@@ -227,6 +240,16 @@ public class StuddyDokkyMap extends AppCompatActivity {
                 public void onResult(IAResult<IAFloorPlan> result) {
                     Log.d(TAG, "fetch floor plan result:" + result);
                     if (result.isSuccess() && result.getResult() != null) {
+                        ImageView mapImage = (ImageView) findViewById(R.id.map_image);
+                        if(mapImage != null) {
+                            if (result.getResult().getName().equals("Stuen")){
+                                mapImage.setImageResource(R.drawable.stuen_aktiv);
+                            } else if (result.getResult().getName().equals("Gang + Toilet")) {
+                                mapImage.setImageResource(R.drawable.gangtoilet_aktiv);
+                            } else {
+                                mapImage.setImageResource(R.drawable.base_map);
+                            }
+                        }
                         mFloorPlan = result.getResult();
                         String fileName = mFloorPlan.getId() + ".img";
                         String filePath = Environment.getExternalStorageDirectory() + "/"

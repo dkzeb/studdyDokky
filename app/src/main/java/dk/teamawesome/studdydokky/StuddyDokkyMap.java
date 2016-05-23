@@ -1,6 +1,10 @@
 package dk.teamawesome.studdydokky;
 
 import android.Manifest;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBar;
 import android.app.DownloadManager;
 import android.content.BroadcastReceiver;
@@ -18,6 +22,10 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 import android.widget.Toolbar;
@@ -56,6 +64,11 @@ public class StuddyDokkyMap extends AppCompatActivity {
     private BlueDotView mImageView;
     private long mDownloadId;
     private DownloadManager mDownloadManager;
+
+    private SharedPreferences mSharedPrefs;
+    public static final String PREFS_NAME = "StudieDOKK1_prefs";
+
+    private SlidingMenu menu;
 
     private IALatLng mLatLng;
 
@@ -105,6 +118,19 @@ public class StuddyDokkyMap extends AppCompatActivity {
     };
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.show_sliding_menu, menu);
+        return true;
+    }
+
+    public void toggleSlideMenu(MenImuItem item){
+        if(menu != null) {
+            menu.toggle();
+        }
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.studdy_dokky_map);
@@ -114,6 +140,10 @@ public class StuddyDokkyMap extends AppCompatActivity {
                 Manifest.permission.ACCESS_WIFI_STATE,
                 Manifest.permission.ACCESS_COARSE_LOCATION
         };
+
+
+        // shared prefs
+        mSharedPrefs = getSharedPreferences(PREFS_NAME, 0);
 
 
         // logo
@@ -126,15 +156,50 @@ public class StuddyDokkyMap extends AppCompatActivity {
         }
 
         // Menu - slider fra siden :D whey
-        SlidingMenu menu = new SlidingMenu(this);
-        menu.setMode(SlidingMenu.LEFT);
-        menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
-        menu.setShadowWidthRes(R.dimen.shadow_width);
-        menu.setShadowDrawable(R.drawable.shadow);
-        menu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
-        menu.setFadeDegree(0.35f);
-        menu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
-        menu.setMenu(R.layout.menu);
+        menu = new SlidingMenu(this);
+        if(menu != null) {
+            menu.setMode(SlidingMenu.LEFT);
+            menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+            menu.setShadowWidthRes(R.dimen.shadow_width);
+            menu.setShadowDrawable(R.drawable.shadow);
+            menu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
+            menu.setFadeDegree(0.35f);
+            menu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
+            menu.setMenu(R.layout.menu);
+        }
+        // menu knapper
+        Button clearDataBtn = (Button) findViewById(R.id.clear_data_button);
+        if(clearDataBtn != null){
+            clearDataBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    new AlertDialog.Builder(StuddyDokkyMap.this)
+                            .setTitle("Ryd al data")
+                            .setMessage("Er du sikker på at du vil rydde al data?")
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                    // hent en shared prefs editor!
+                                    mSharedPrefs.edit().clear(); // ryd hele lortet!
+                                    // tell em we did!
+                                    Toast.makeText(StuddyDokkyMap.this, "Al data ryddet - lukker app'en", Toast.LENGTH_LONG).show();
+                                    // exit app!
+                                    finish();
+                                }
+                            })
+                            .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // ingenting, ud igen :)
+                                    Toast.makeText(StuddyDokkyMap.this, "Undlader at rydde data!", Toast.LENGTH_LONG).show();
+                                    menu.toggle();
+
+                                }
+                            })
+                            .setIcon(R.drawable.icon_delete)
+                            .show();
+                }
+            });
+        }
 
         // IndoorAtlas
         findViewById(android.R.id.content).setKeepScreenOn(true);

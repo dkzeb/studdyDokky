@@ -10,15 +10,15 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Aktiviteter"
-        android:id="@+id/button"
+        android:id="@+id/activities_button"
         android:background="@color/dokk1_button_blue"
         android:textColor="@color/white"/>
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Mine Interesser"
-        android:id="@+id/button2"
-        android:layout_below="@id/button"
+        android:id="@+id/interest_button"
+        android:layout_below="@id/activities_button"
         android:background="@color/dokk1_button_blue"
         android:textColor="@color/white"/>
     <ToggleButton
@@ -26,15 +26,15 @@
         android:layout_height="wrap_content"
         android:textOn="Notifikationer: Slået til"
         android:textOff="Notifikationer: Slået fra"
-        android:id="@+id/button3"
-        android:layout_below="@id/button2"
+        android:id="@+id/notification_toggle_button"
+        android:layout_below="@id/interest_button"
         android:background="@color/dokk1_button_blue"
         android:textColor="@color/white"/>
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Ryd al data nu"
-        android:id="@+id/button4"
+        android:id="@+id/clear_data_button"
         android:layout_alignParentBottom="true"
         android:background="@color/dokk1_button_blue"
         android:textColor="@color/white"/>

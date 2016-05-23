@@ -124,7 +124,7 @@ public class StuddyDokkyMap extends AppCompatActivity {
         return true;
     }
 
-    public void toggleSlideMenu(MenImuItem item){
+    public void toggleSlideMenu(MenuItem item){
         if(menu != null) {
             menu.toggle();
         }
@@ -157,7 +157,6 @@ public class StuddyDokkyMap extends AppCompatActivity {
 
         // Menu - slider fra siden :D whey
         menu = new SlidingMenu(this);
-        if(menu != null) {
             menu.setMode(SlidingMenu.LEFT);
             menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
             menu.setShadowWidthRes(R.dimen.shadow_width);
@@ -166,7 +165,7 @@ public class StuddyDokkyMap extends AppCompatActivity {
             menu.setFadeDegree(0.35f);
             menu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
             menu.setMenu(R.layout.menu);
-        }
+
         // menu knapper
         Button clearDataBtn = (Button) findViewById(R.id.clear_data_button);
         if(clearDataBtn != null){

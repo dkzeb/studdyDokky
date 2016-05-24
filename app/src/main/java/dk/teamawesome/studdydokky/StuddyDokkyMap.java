@@ -52,7 +52,7 @@ import java.util.logging.Logger;
 
 public class StuddyDokkyMap extends AppCompatActivity {
 
-    private static final String TAG = "Studdy Dokky";
+    public static final String TAG = "Studdy Dokky";
 
     // blue dot radius in meters
     private static final float dotRadius = 0.5f;
@@ -144,6 +144,10 @@ public class StuddyDokkyMap extends AppCompatActivity {
 
         // shared prefs
         mSharedPrefs = getSharedPreferences(PREFS_NAME, 0);
+
+        // bg services
+        Intent mNotificationSystemServiceIntent = new Intent(getApplicationContext(), NotificationSystemService.class);
+        getApplicationContext().startService(mNotificationSystemServiceIntent);
 
 
         // logo

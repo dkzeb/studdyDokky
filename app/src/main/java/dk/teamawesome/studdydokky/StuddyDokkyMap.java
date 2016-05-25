@@ -1,37 +1,32 @@
 package dk.teamawesome.studdydokky;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.SharedPreferences;
-import android.support.v7.app.ActionBar;
 import android.app.DownloadManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.database.Cursor;
+import android.content.SharedPreferences;
 import android.graphics.PointF;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Environment;
 import android.os.Looper;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
-import com.davemorrissey.labs.subscaleview.ImageSource;
-import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.indooratlas.android.sdk.IALocation;
 import com.indooratlas.android.sdk.IALocationListener;
 import com.indooratlas.android.sdk.IALocationManager;
@@ -45,15 +40,14 @@ import com.indooratlas.android.sdk.resources.IAResult;
 import com.indooratlas.android.sdk.resources.IAResultCallback;
 import com.indooratlas.android.sdk.resources.IATask;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
-import com.squareup.picasso.Picasso;
+
+import org.json.JSONObject;
 
 import java.io.File;
-import java.util.logging.Logger;
 
 public class StuddyDokkyMap extends AppCompatActivity {
-
+    public JSONObject onTheOtherSideJObj;
     private static final String TAG = "Studdy Dokky";
-
     // blue dot radius in meters
     private static final float dotRadius = 0.5f;
 
@@ -64,7 +58,6 @@ public class StuddyDokkyMap extends AppCompatActivity {
     private BlueDotView mImageView;
     private long mDownloadId;
     private DownloadManager mDownloadManager;
-
     private SharedPreferences mSharedPrefs;
     public static final String PREFS_NAME = "StudieDOKK1_prefs";
 
@@ -97,9 +90,9 @@ public class StuddyDokkyMap extends AppCompatActivity {
             if (region.getType() == IARegion.TYPE_FLOOR_PLAN && map_image != null) {
                 String id = region.getId();
                 Log.d(TAG, "floorPlan changed to " + id);
-                if(id.equals(R.string.stuen_id)){
+                if (id.equals(R.string.stuen_id)) {
                     map_image.setImageResource(R.drawable.stuen_aktiv);
-                } else if(id.equals(R.string.toilet_gang_id)){
+                } else if (id.equals(R.string.toilet_gang_id)) {
                     map_image.setImageResource(R.drawable.gangtoilet_aktiv);
                 } else {
                     map_image.setImageResource(R.drawable.base_map);
@@ -124,8 +117,8 @@ public class StuddyDokkyMap extends AppCompatActivity {
         return true;
     }
 
-    public void toggleSlideMenu(MenuItem item){
-        if(menu != null) {
+    public void toggleSlideMenu(MenuItem item) {
+        if (menu != null) {
             menu.toggle();
         }
     }
@@ -134,7 +127,6 @@ public class StuddyDokkyMap extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.studdy_dokky_map);
-
         String[] neededPermissions = {
                 Manifest.permission.CHANGE_WIFI_STATE,
                 Manifest.permission.ACCESS_WIFI_STATE,
@@ -148,7 +140,7 @@ public class StuddyDokkyMap extends AppCompatActivity {
 
         // logo
         ActionBar actionBar = getSupportActionBar();
-        if(actionBar != null){
+        if (actionBar != null) {
             actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_HOME | ActionBar.DISPLAY_SHOW_TITLE);
             actionBar.setTitle("studieDOKK1");
             actionBar.setDisplayUseLogoEnabled(true);
@@ -157,18 +149,29 @@ public class StuddyDokkyMap extends AppCompatActivity {
 
         // Menu - slider fra siden :D whey
         menu = new SlidingMenu(this);
-            menu.setMode(SlidingMenu.LEFT);
-            menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
-            menu.setShadowWidthRes(R.dimen.shadow_width);
-            menu.setShadowDrawable(R.drawable.shadow);
-            menu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
-            menu.setFadeDegree(0.35f);
-            menu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
-            menu.setMenu(R.layout.menu);
+        menu.setMode(SlidingMenu.LEFT);
+        menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+        menu.setShadowWidthRes(R.dimen.shadow_width);
+        menu.setShadowDrawable(R.drawable.shadow);
+        menu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
+        menu.setFadeDegree(0.35f);
+        menu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
+        menu.setMenu(R.layout.menu);
 
         // menu knapper
+        Button interestBtn = (Button) findViewById(R.id.interest_button);
+        interestBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(StuddyDokkyMap.this, ActivityView.class);
+                //intent.putExtra("activityArray", (Serializable) onTheOtherSideArray);
+                //Toast.makeText(getApplicationContext(),onTheOtherSideArray.toString(),Toast.LENGTH_LONG).show();
+                startActivity(intent);
+            }
+        });
+
         Button clearDataBtn = (Button) findViewById(R.id.clear_data_button);
-        if(clearDataBtn != null){
+        if (clearDataBtn != null) {
             clearDataBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -217,9 +220,34 @@ public class StuddyDokkyMap extends AppCompatActivity {
             final IALocation location = IALocation.from(IARegion.floorPlan(floorPlanId));
             //mIALocationManager.setLocation(location);
         }
-
+        getJSONArray();
     }
 
+    private void getJSONArray() {
+        class anonymousJSONParser extends AsyncTask<String, Void, JSONObject> {
+            JSONParser jsp = new JSONParser();
+            JSONObject tempJObj = new JSONObject();
+
+
+            protected void onPreExecute() {
+                super.onPreExecute();
+            }
+
+            protected void onPostExecute(JSONObject s) {
+                super.onPostExecute(s);
+                onTheOtherSideJObj = tempJObj;
+                Toast.makeText(getApplicationContext(),onTheOtherSideJObj.toString(),Toast.LENGTH_LONG ).show();
+            }
+
+            protected JSONObject doInBackground(String... params) {
+                tempJObj = jsp.getJSONFromUrl("http://events.makeable.dk/api/getEvents");
+                return tempJObj;
+            }
+        }
+
+        AsyncTask<String, Void, JSONObject> task = new anonymousJSONParser();
+        task.execute();
+    }
 
     @Override
     protected void onDestroy() {
@@ -305,8 +333,8 @@ public class StuddyDokkyMap extends AppCompatActivity {
                     Log.d(TAG, "fetch floor plan result:" + result);
                     if (result.isSuccess() && result.getResult() != null) {
                         ImageView mapImage = (ImageView) findViewById(R.id.map_image);
-                        if(mapImage != null) {
-                            if (result.getResult().getName().equals("Stuen")){
+                        if (mapImage != null) {
+                            if (result.getResult().getName().equals("Stuen")) {
                                 mapImage.setImageResource(R.drawable.stuen_aktiv);
                             } else if (result.getResult().getName().equals("Gang + Toilet")) {
                                 mapImage.setImageResource(R.drawable.gangtoilet_aktiv);
@@ -357,4 +385,5 @@ public class StuddyDokkyMap extends AppCompatActivity {
             mPendingAsyncResult.cancel();
         }
     }
+
 }

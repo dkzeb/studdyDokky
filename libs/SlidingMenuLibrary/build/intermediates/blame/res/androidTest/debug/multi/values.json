@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "/home/zeb/Dev/studdyDokky/libs/SlidingMenuLibrary/build/intermediates/res/merged/androidTest/debug/values/values.xml",
+        "outputFile": "C:\\Users\\Medes\\Documents\\GitHub\\studdyDokky\\libs\\SlidingMenuLibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\values\\values.xml",
         "map": [
             {
                 "to": {
@@ -11,7 +11,31 @@
                     "endOffset": 999
                 },
                 "from": {
-                    "file": "/home/zeb/Dev/studdyDokky/libs/SlidingMenuLibrary/build/intermediates/bundles/debug/res/values/values.xml",
+                    "file": "C:\\Users\\Medes\\Documents\\GitHub\\studdyDokky\\libs\\SlidingMenuLibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 961,
+                        "endColumn": 42,
+                        "endOffset": 999
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "outputFile": "C:\\home\\zeb\\Dev\\studdyDokky\\libs\\SlidingMenuLibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\values\\values.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 961,
+                    "endColumn": 42,
+                    "endOffset": 999
+                },
+                "from": {
+                    "file": "C:\\home\\zeb\\Dev\\studdyDokky\\libs\\SlidingMenuLibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,

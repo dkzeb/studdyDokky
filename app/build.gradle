@@ -3,6 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
+    useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
         applicationId "dk.teamawesome.studdydokky"
@@ -24,7 +25,7 @@ dependencies {
     compile 'com.davemorrissey.labs:subsampling-scale-image-view:3.5.0'
     compile 'com.indooratlas.android:indooratlas-android-sdk:2.1.2@aar'
 }
-repositories{
+repositories {
     maven {
         url "http://indooratlas-ltd.bintray.com/mvn-public"
     }
@@ -36,4 +37,13 @@ dependencies {
     compile project(':libs:SlidingMenuLibrary')
 
     compile 'com.google.android.gms:play-services-appindexing:8.1.0'
+}
+dependencies {
+    compile 'com.android.support:support-v4:23.+'
+}
+dependencies {
+    compile 'com.android.support:support-v4:23.+'
+}
+dependencies {
+    compile 'com.android.support:design:23.+'
 }

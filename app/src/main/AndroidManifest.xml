@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="dk.teamawesome.studdydokky">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-
-    <uses-permission
-        android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
-    <uses-permission
-        android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
-    <uses-feature android:name="android.hardware.sensor.accelerometer"
+    <uses-feature
+        android:name="android.hardware.sensor.accelerometer"
         android:required="true" />
-    <uses-feature android:name="android.hardware.sensor.compass"
+    <uses-feature
+        android:name="android.hardware.sensor.compass"
         android:required="true" />
-    <uses-feature android:name="android.hardware.sensor.gyroscope"
+    <uses-feature
+        android:name="android.hardware.sensor.gyroscope"
         android:required="true" />
-    <uses-feature android:name="android.hardware.wifi"
+    <uses-feature
+        android:name="android.hardware.wifi"
         android:required="true" />
 
     <application
@@ -26,22 +27,29 @@
         <activity android:name=".StuddyDokkyMap">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <!-- IndoorAtlas API key og signup stuff -->
         <meta-data
             android:name="com.indooratlas.android.sdk.API_KEY"
-            android:value="2e55ccd9-4688-46d1-add2-7b74c653e2cd"/>
+            android:value="2e55ccd9-4688-46d1-add2-7b74c653e2cd" />
         <meta-data
             android:name="com.indooratlas.android.sdk.API_SECRET"
-            android:value="BXeBJM9XPRWY2FtlXEBNloC/bQSf0eZZDpCIRTUej9Pdgb32Ax5b6ZS+5msD3tiVE1s+zJWBPEFvOTdnuE5Es4opl7FmCuojOYFBEwtKiFgJD1Q/8zN0ie8vKJsO/Q=="/>
-        <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
-             App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+            android:value="BXeBJM9XPRWY2FtlXEBNloC/bQSf0eZZDpCIRTUej9Pdgb32Ax5b6ZS+5msD3tiVE1s+zJWBPEFvOTdnuE5Es4opl7FmCuojOYFBEwtKiFgJD1Q/8zN0ie8vKJsO/Q==" />
+        <!--
+             ATTENTION: This was auto-generated to add Google Play services to your project for
+             App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
+        -->
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-
+        <activity
+            android:name=".ActivityView"
+            android:label="@string/title_activity_activity_view"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
+
 </manifest>

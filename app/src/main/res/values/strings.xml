@@ -3,4 +3,10 @@
     <string name="floorplan_id">1662b898-81d4-4e5f-8505-9e0a8db1e839</string>
     <string name="stuen_id">4e11af04-c60b-4953-ab65-62d66877d107</string>
     <string name="toilet_gang_id">f0a26008-5966-444e-8985-ff6e3ae94a2c</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_interest_view">InterestView</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_activity_view">ActivityView</string>
 </resources>

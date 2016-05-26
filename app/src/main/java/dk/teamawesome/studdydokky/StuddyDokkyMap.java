@@ -41,12 +41,12 @@ import com.indooratlas.android.sdk.resources.IAResultCallback;
 import com.indooratlas.android.sdk.resources.IATask;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
 
 public class StuddyDokkyMap extends AppCompatActivity {
-    public JSONObject onTheOtherSideJObj;
     private static final String TAG = "Studdy Dokky";
     // blue dot radius in meters
     private static final float dotRadius = 0.5f;
@@ -60,7 +60,7 @@ public class StuddyDokkyMap extends AppCompatActivity {
     private DownloadManager mDownloadManager;
     private SharedPreferences mSharedPrefs;
     public static final String PREFS_NAME = "StudieDOKK1_prefs";
-
+    public ActivityHandler activityHandler = new ActivityHandler();
     private SlidingMenu menu;
 
     private IALatLng mLatLng;
@@ -159,13 +159,11 @@ public class StuddyDokkyMap extends AppCompatActivity {
         menu.setMenu(R.layout.menu);
 
         // menu knapper
-        Button interestBtn = (Button) findViewById(R.id.interest_button);
-        interestBtn.setOnClickListener(new View.OnClickListener() {
+        Button activitiesBtn = (Button) findViewById(R.id.activities_button);
+        activitiesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(StuddyDokkyMap.this, ActivityView.class);
-                //intent.putExtra("activityArray", (Serializable) onTheOtherSideArray);
-                //Toast.makeText(getApplicationContext(),onTheOtherSideArray.toString(),Toast.LENGTH_LONG).show();
                 startActivity(intent);
             }
         });
@@ -201,6 +199,7 @@ public class StuddyDokkyMap extends AppCompatActivity {
                             .show();
                 }
             });
+
         }
 
         // IndoorAtlas
@@ -220,34 +219,14 @@ public class StuddyDokkyMap extends AppCompatActivity {
             final IALocation location = IALocation.from(IARegion.floorPlan(floorPlanId));
             //mIALocationManager.setLocation(location);
         }
-        getJSONArray();
-    }
-
-    private void getJSONArray() {
-        class anonymousJSONParser extends AsyncTask<String, Void, JSONObject> {
-            JSONParser jsp = new JSONParser();
-            JSONObject tempJObj = new JSONObject();
-
-
-            protected void onPreExecute() {
-                super.onPreExecute();
-            }
-
-            protected void onPostExecute(JSONObject s) {
-                super.onPostExecute(s);
-                onTheOtherSideJObj = tempJObj;
-                Toast.makeText(getApplicationContext(),onTheOtherSideJObj.toString(),Toast.LENGTH_LONG ).show();
-            }
-
-            protected JSONObject doInBackground(String... params) {
-                tempJObj = jsp.getJSONFromUrl("http://events.makeable.dk/api/getEvents");
-                return tempJObj;
-            }
+        try {
+            activityHandler.main();
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
-
-        AsyncTask<String, Void, JSONObject> task = new anonymousJSONParser();
-        task.execute();
     }
+
+
 
     @Override
     protected void onDestroy() {

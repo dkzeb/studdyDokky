@@ -50,8 +50,9 @@ public class CustomAdapter extends BaseAdapter {
 
 
     public View getView(int position, View convertView, ViewGroup parent, Context context) {
+        //SKAL ÆNDRES TIL AT VÆRE LAYOUT FOR ACTIVITY FRAGMENT
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.activity_activity_view, parent, false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.custom_adapter_griditem, parent, false);
         }
 
         TextView title = (TextView) convertView.findViewById(R.id.imageTextView1);
@@ -75,6 +76,5 @@ public class CustomAdapter extends BaseAdapter {
             e.printStackTrace();
         }
         return convertView;
-
     }
 }

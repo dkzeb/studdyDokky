@@ -11,7 +11,6 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.PointF;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -42,7 +41,6 @@ import com.indooratlas.android.sdk.resources.IATask;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.File;
 
@@ -159,14 +157,6 @@ public class StuddyDokkyMap extends AppCompatActivity {
         menu.setMenu(R.layout.menu);
 
         // menu knapper
-        Button activitiesBtn = (Button) findViewById(R.id.activities_button);
-        activitiesBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(StuddyDokkyMap.this, ActivityView.class);
-                startActivity(intent);
-            }
-        });
 
         Button clearDataBtn = (Button) findViewById(R.id.clear_data_button);
         if (clearDataBtn != null) {

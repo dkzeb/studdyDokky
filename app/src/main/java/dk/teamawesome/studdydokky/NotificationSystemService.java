@@ -9,8 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
-import android.widget.Toast;
+
 
 /**
  * Created by zeb on 24-05-16.
@@ -82,8 +81,6 @@ public class NotificationSystemService extends IntentService {
 
     final Runnable BGRunnable = new Runnable(){
         public void run(){
-
-
 
             BuildActivityNotification("Børneteater", "Scenetrappen", "13:37");
 

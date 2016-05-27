@@ -120,7 +120,7 @@ public class ActivityHandler {
         String imageUrl;
         String description;
         String category;
-        int id;
+        String id;
         String tagHolder;
         String[] tags;
         for(int i = 0; i < timeSortedActivities.length();i++){
@@ -133,7 +133,7 @@ public class ActivityHandler {
             imageUrl = item.getString("picture_name");
             description = item.getString("description");
             category = item.getString("category");
-            id = Integer.parseInt(item.getString("id"));
+            id = item.getString("eventid");
             tagHolder = item.getString("tags");
             List<String> tagsList = Arrays.asList(tagHolder.split(","));
             tags = new String[tagsList.size()];

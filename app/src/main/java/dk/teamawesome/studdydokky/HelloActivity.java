@@ -16,9 +16,18 @@ import android.view.animation.Animation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import com.google.gson.Gson;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.io.IOException;
+
 public class HelloActivity extends AppCompatActivity {
 
     private SharedPreferences prefs;
+    ActivityHandler activityHandler = new ActivityHandler();
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -50,13 +59,22 @@ public class HelloActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         // alt herunder er init!
+        prefs = getApplicationContext().getSharedPreferences(getString(R.string.prefs_name), Context.MODE_PRIVATE);
 
-
+        try {
+            activityHandler.main();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        try {
+            saveActivityToSharedPreferences();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
         // alt herover er init!
 
-        prefs = getApplicationContext().getSharedPreferences(getString(R.string.prefs_name), Context.MODE_PRIVATE);
         boolean firstRun = prefs.getBoolean("firstRun", true); // vi går ud fra at det her er first run
         if(!firstRun){
             Intent mainIntent = new Intent(getApplicationContext(), MainViewFragment.class);
@@ -74,5 +92,13 @@ public class HelloActivity extends AppCompatActivity {
             AnimationDrawable helloAnimated = (AnimationDrawable) animated_hello_image.getDrawable();
             helloAnimated.start();
         }
+    }
+
+    public void saveActivityToSharedPreferences() throws IOException {
+        Gson gson = new Gson();
+        String spArray = gson.toJson(ActivityHandler.activityDataAL);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("KEY", spArray);
+        editor.commit();
     }
 }

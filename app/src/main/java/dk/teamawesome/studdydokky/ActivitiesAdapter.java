@@ -31,7 +31,7 @@ public class ActivitiesAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return arrayList.get(position).getId();
+        return 0l;
     }
 
     @Override

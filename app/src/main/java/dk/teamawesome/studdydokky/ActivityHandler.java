@@ -6,6 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -47,7 +48,12 @@ public class ActivityHandler {
                     stripDokk1Activities();
                     stripOldActivities();
                     makeActivityList();
+                    LoadingActivity.saveActivityToSharedPreferences();
+                    LoadingActivity.startApp();
+
                 } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (IOException e){
                     e.printStackTrace();
                 }
             }
@@ -120,7 +126,7 @@ public class ActivityHandler {
         String imageUrl;
         String description;
         String category;
-        int id;
+        String id;
         String tagHolder;
         String[] tags;
         for(int i = 0; i < timeSortedActivities.length();i++){
@@ -133,7 +139,7 @@ public class ActivityHandler {
             imageUrl = item.getString("picture_name");
             description = item.getString("description");
             category = item.getString("category");
-            id = Integer.parseInt(item.getString("id"));
+            id = item.getString("eventid");
             tagHolder = item.getString("tags");
             List<String> tagsList = Arrays.asList(tagHolder.split(","));
             tags = new String[tagsList.size()];

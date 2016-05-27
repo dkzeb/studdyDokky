@@ -10,13 +10,13 @@ public class ActivityData {
     public String imageUrl;
     public String description;
     public String category;
-    public int id;
+    public String id;
     public String[] tags;
     //Hvad gør vi med den mere specifikke position på Dokk1?
 
 
 
-    public ActivityData(String titl, String sTime, String eTime, String iUrl, String descrip, String cat, int id_, String[] a){
+    public ActivityData(String titl, String sTime, String eTime, String iUrl, String descrip, String cat, String id_, String[] a){
         title = titl;
         startTime = sTime;
         endTime = eTime;
@@ -51,7 +51,7 @@ public class ActivityData {
         return category;
     }
 
-    public int getId() { return id; }
+    public String getId() { return id; }
 
     public String[] getTags() { return tags; }
 }

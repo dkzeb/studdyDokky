@@ -55,15 +55,19 @@ public class ChooseInterests extends AppCompatActivity {
                             {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
+                                    Intent nextIntent = new Intent(getApplicationContext(), MainViewFragment.class);
+                                    startActivity(nextIntent);
                                     finish();
                                 }
 
                             })
                             .setNegativeButton("Nej", null)
                             .show();
+                } else {
+                    Intent nextIntent = new Intent(getApplicationContext(), MainViewFragment.class);
+                    startActivity(nextIntent);
+                    finish();
                 }
-                Intent nextIntent = new Intent(getApplicationContext(), MainViewFragment.class);
-                startActivity(nextIntent);
 
 
 

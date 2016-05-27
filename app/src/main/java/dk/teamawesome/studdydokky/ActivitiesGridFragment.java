@@ -15,8 +15,7 @@ import java.util.ArrayList;
 
 
 public class ActivitiesGridFragment extends Fragment {
-    private OnFragmentInteractionListener mListener;
-    public static final String PREFS_NAME = "MyApp_Settings";
+    //private OnFragmentInteractionListener mListener;
     public SharedPreferences settings;
     public ArrayList<ActivityData> activityData;
     public ActivitiesGridFragment() {
@@ -30,7 +29,7 @@ public class ActivitiesGridFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        settings = getActivity().getSharedPreferences(PREFS_NAME, 1);
+        settings = getActivity().getSharedPreferences(getString(R.string.prefs_name), 0);
         String str = settings.getString("KEY", null);
         Type type = new TypeToken<ArrayList<ActivityData>>(){}.getType();
         Gson gson = new Gson();
@@ -45,33 +44,5 @@ public class ActivitiesGridFragment extends Fragment {
         return inflater.inflate(R.layout.activity_grid_layout, container, false);
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
 }

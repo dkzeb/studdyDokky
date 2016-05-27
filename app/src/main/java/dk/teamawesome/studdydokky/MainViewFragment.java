@@ -39,7 +39,7 @@ public class MainViewFragment extends FragmentActivity {
         mTabHost.setup(this, getSupportFragmentManager(), R.id.tabcontent);
         mTabHost.addTab(
                 mTabHost.newTabSpec("tab1").setIndicator("Aktiviteter", null),
-                FragmentTab.class, null);
+                ActivitiesGridFragment.class, null);
         mTabHost.addTab(
                 mTabHost.newTabSpec("tab2").setIndicator("Kort", null),
                 MapFragment.class, null);
@@ -50,6 +50,8 @@ public class MainViewFragment extends FragmentActivity {
             TextView tv = (TextView) tw.getChildAt(i).findViewById(android.R.id.title);
             tv.setTextColor(Color.WHITE);
         }
+
+        mTabHost.setCurrentTab(1);
 
     }
 

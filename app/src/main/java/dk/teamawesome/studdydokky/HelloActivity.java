@@ -49,11 +49,17 @@ public class HelloActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // alt herunder er init!
+
+
+
+
+        // alt herover er init!
 
         prefs = getApplicationContext().getSharedPreferences(getString(R.string.prefs_name), Context.MODE_PRIVATE);
         boolean firstRun = prefs.getBoolean("firstRun", true); // vi går ud fra at det her er first run
         if(!firstRun){
-            Intent mainIntent = new Intent(getApplicationContext(), StuddyDokkyMap.class);
+            Intent mainIntent = new Intent(getApplicationContext(), MainViewFragment.class);
             startActivity(mainIntent);
             finish();
         } else {

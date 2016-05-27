@@ -6,6 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -47,7 +48,12 @@ public class ActivityHandler {
                     stripDokk1Activities();
                     stripOldActivities();
                     makeActivityList();
+                    LoadingActivity.saveActivityToSharedPreferences();
+                    LoadingActivity.startApp();
+
                 } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (IOException e){
                     e.printStackTrace();
                 }
             }

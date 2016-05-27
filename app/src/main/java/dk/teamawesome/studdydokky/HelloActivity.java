@@ -1,6 +1,7 @@
 package dk.teamawesome.studdydokky;
 
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,6 +9,7 @@ import android.graphics.drawable.AnimationDrawable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -25,9 +27,9 @@ import java.io.IOException;
 
 public class HelloActivity extends AppCompatActivity {
 
-    private SharedPreferences prefs;
-    ActivityHandler activityHandler = new ActivityHandler();
-
+    private static SharedPreferences prefs;
+    ActivityHandler activityHandler;
+    private static ProgressDialog waitDlg;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -58,23 +60,9 @@ public class HelloActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // alt herunder er init!
+        setContentView(R.layout.loading_layout);
         prefs = getApplicationContext().getSharedPreferences(getString(R.string.prefs_name), Context.MODE_PRIVATE);
-
-        try {
-            activityHandler.main();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        try {
-            saveActivityToSharedPreferences();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-        // alt herover er init!
-
+        //dialog.hide();
         boolean firstRun = prefs.getBoolean("firstRun", true); // vi går ud fra at det her er first run
         if(!firstRun){
             Intent mainIntent = new Intent(getApplicationContext(), MainViewFragment.class);
@@ -93,12 +81,15 @@ public class HelloActivity extends AppCompatActivity {
             helloAnimated.start();
         }
     }
-
-    public void saveActivityToSharedPreferences() throws IOException {
+/*
+    public static void saveActivityToSharedPreferences() throws IOException {
         Gson gson = new Gson();
         String spArray = gson.toJson(ActivityHandler.activityDataAL);
         SharedPreferences.Editor editor = prefs.edit();
+        Log.d(StuddyDokkyMap.TAG, "SpARR: "+spArray);
         editor.putString("KEY", spArray);
         editor.commit();
     }
+*/
+
 }

@@ -42,10 +42,14 @@ public class ChooseInterests extends AppCompatActivity {
 
                 boolean nonChecked = false;
                 for(int i = 0; i < interestList.getAdapter().getCount(); i++){
-                    InterestModel model = (InterestModel) interestList.getAdapter().getItem(i);
-                    nonChecked = model.getChecked();
-                    System.out.println("Interesse: "+model.getName()+ "Checked: "+model.getChecked());
+                    if(nonChecked != true) {
+                        InterestModel model = (InterestModel) interestList.getAdapter().getItem(i);
+                        nonChecked = model.getChecked();
+                        System.out.println("Interesse: " + model.getName() + "Checked: " + model.getChecked());
+                    }
                 }
+
+                System.out.println("NonChecked: "+nonChecked);
                 if(!nonChecked){
                     new AlertDialog.Builder(this)
                             .setIcon(android.R.drawable.ic_dialog_alert)

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animation-list xmlns:android="http://schemas.android.com/apk/res/android"
-    android:oneshot="false">
+    android:oneshot="false"> <!--
         <item android:drawable="@drawable/boy_waving_png_0000" android:duration="50" />
         <item android:drawable="@drawable/boy_waving_png_0001" android:duration="50" />
         <item android:drawable="@drawable/boy_waving_png_0002" android:duration="50" />
@@ -21,14 +21,8 @@
         <item android:drawable="@drawable/boy_waving_png_0017" android:duration="50" />
         <item android:drawable="@drawable/boy_waving_png_0018" android:duration="50" />
         <item android:drawable="@drawable/boy_waving_png_0019" android:duration="50" />
-        <item android:drawable="@drawable/boy_waving_png_0020" android:duration="50" />
-        <item android:drawable="@drawable/boy_waving_png_0021" android:duration="50" />
-        <item android:drawable="@drawable/boy_waving_png_0022" android:duration="50" />
-        <item android:drawable="@drawable/boy_waving_png_0023" android:duration="50" />
-        <item android:drawable="@drawable/boy_waving_png_0024" android:duration="50" />
-        <item android:drawable="@drawable/boy_waving_png_0025" android:duration="50" />
-        <item android:drawable="@drawable/boy_waving_png_0026" android:duration="50" />
-        <item android:drawable="@drawable/boy_waving_png_0027" android:duration="50" />
+        <item android:drawable="@drawable/boy_waving_png_0020" android:duration="50" /> -->
+
         <item android:drawable="@drawable/boy_waving_png_0028" android:duration="50" />
         <item android:drawable="@drawable/boy_waving_png_0029" android:duration="50" />
         <item android:drawable="@drawable/boy_waving_png_0030" android:duration="50" />
@@ -108,4 +102,11 @@
         <item android:drawable="@drawable/boy_waving_png_0104" android:duration="50" />
         <item android:drawable="@drawable/boy_waving_png_0105" android:duration="50" />
         <item android:drawable="@drawable/boy_waving_png_0106" android:duration="50" />
+        <item android:drawable="@drawable/boy_waving_png_0021" android:duration="50" />
+        <item android:drawable="@drawable/boy_waving_png_0022" android:duration="50" />
+        <item android:drawable="@drawable/boy_waving_png_0023" android:duration="50" />
+        <item android:drawable="@drawable/boy_waving_png_0024" android:duration="50" />
+        <item android:drawable="@drawable/boy_waving_png_0025" android:duration="50" />
+        <item android:drawable="@drawable/boy_waving_png_0026" android:duration="50" />
+        <item android:drawable="@drawable/boy_waving_png_0027" android:duration="50" />
     </animation-list>

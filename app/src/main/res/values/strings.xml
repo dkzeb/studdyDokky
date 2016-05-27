@@ -4,4 +4,7 @@
     <string name="stuen_id">4e11af04-c60b-4953-ab65-62d66877d107</string>
     <string name="toilet_gang_id">f0a26008-5966-444e-8985-ff6e3ae94a2c</string>
     <string name="prefs_name">StudieDOKK1_Preferences</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

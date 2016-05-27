@@ -13,33 +13,32 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageView"
-        android:src="@drawable/studiedokk1_logo_transparent_white"
-        android:layout_marginLeft="96dp"
-        android:layout_marginRight="96dp"
+        android:id="@+id/hello_wave_imageview"
+        android:src="@drawable/boy_wave_animated"
+        android:layout_marginTop="49dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Velkommen som studerende på DOKK1"
-        android:textStyle="bold"
-        android:textSize="19dp"
-        android:id="@+id/textView"
-        android:textColor="@color/white"
-        android:gravity="center"
-        android:layout_alignBottom="@+id/imageView"
-        android:layout_alignParentStart="true" />
-
-    <ImageButton
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/welcome_next_btn"
-        android:background="@color/dokk1_blue"
-        android:src="@drawable/ic_arrow_forward_24dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:id="@+id/imageView"
+        android:layout_below="@+id/hello_wave_imageview"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/studiedokk1_logo_transparent_white"
+        android:paddingLeft="50dp" android:paddingRight="50dp"
+        android:paddingBottom="100dp"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Velkommen som studerende på DOKK1"
+        android:textColor="@color/white"
+        android:id="@+id/textView"
+        android:layout_alignBottom="@+id/imageView"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:textStyle="bold" android:textSize="20dp"
+        android:paddingBottom="65dp"/>
 </RelativeLayout>

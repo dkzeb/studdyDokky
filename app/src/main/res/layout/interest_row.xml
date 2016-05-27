@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dokk1_blue"
+    android:gravity="fill_horizontal">
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_weight=".80"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/interest_row_text"
+        android:padding="20dp"/>
+
+    <CheckBox
+        android:layout_width="0dp"
+        android:buttonTint="@color/dokk1_orange"
+        android:layout_weight=".20"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:gravity="center"
+        android:id="@+id/interest_row_checkbox"
+        android:padding="20dp"/>9
+</LinearLayout>

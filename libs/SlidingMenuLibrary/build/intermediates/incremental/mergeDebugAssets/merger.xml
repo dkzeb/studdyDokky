@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="/home/robotto/Hack/AU/studdyDokky/libs/SlidingMenuLibrary/assets"/></dataSet><dataSet config="debug"><source path="/home/robotto/Hack/AU/studdyDokky/libs/SlidingMenuLibrary/src/debug/assets"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="/home/zeb/Dev/studdyDokky/libs/SlidingMenuLibrary/assets"/></dataSet><dataSet config="debug"><source path="/home/zeb/Dev/studdyDokky/libs/SlidingMenuLibrary/src/debug/assets"/></dataSet></merger>

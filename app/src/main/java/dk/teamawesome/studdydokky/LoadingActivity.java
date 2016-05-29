@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.v7.app.ActionBar;
@@ -23,6 +25,7 @@ public class LoadingActivity extends AppCompatActivity {
 
     private static SharedPreferences prefs;
     private static Context mContext;
+    public static Bitmap bmp;
 
     private static Activity activity;
     @Override
@@ -38,7 +41,8 @@ public class LoadingActivity extends AppCompatActivity {
         Log.d(StuddyDokkyMap.TAG, "Loading application...");
         prefs = getApplicationContext().getSharedPreferences(getString(R.string.prefs_name), Context.MODE_PRIVATE);
         mContext = getApplicationContext();
-        ActivityHandler ah = new ActivityHandler();
+        bmp = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.placeholder);
+        ActivityHandler ah = new ActivityHandler(mContext);
         try {
             ah.main();
         } catch (JSONException e){

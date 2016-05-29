@@ -1,5 +1,7 @@
 package dk.teamawesome.studdydokky;
 
+import android.graphics.Bitmap;
+
 /**
  * Created by Medes on 27/05/2016.
  */
@@ -7,7 +9,7 @@ public class ActivityData {
     public String title;
     public String startTime;
     public String endTime;
-    public String imageUrl;
+    public String image;
     public String description;
     public String category;
     public String id;
@@ -16,11 +18,11 @@ public class ActivityData {
 
 
 
-    public ActivityData(String titl, String sTime, String eTime, String iUrl, String descrip, String cat, String id_, String[] a){
+    public ActivityData(String titl, String sTime, String eTime, String img, String descrip, String cat, String id_, String[] a){
         title = titl;
         startTime = sTime;
         endTime = eTime;
-        imageUrl = iUrl;
+        image = img;
         description = descrip;
         category = cat;
         id = id_;
@@ -39,9 +41,7 @@ public class ActivityData {
         return endTime;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
+    public String getImageUrl() {return image;}
 
     public String getDescription() {
         return description;

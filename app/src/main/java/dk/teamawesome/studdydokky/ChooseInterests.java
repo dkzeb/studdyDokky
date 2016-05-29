@@ -102,9 +102,69 @@ public class ChooseInterests extends AppCompatActivity {
         interestList = (ListView) findViewById(R.id.interest_list_view);
 
         interesser = new ArrayList<InterestModel>();
+        /*
         for(int x = 0; x < 15; x++){
             interesser.add(new InterestModel("Interesse "+x));
+        }*/
+
+        //tilføj en shitload interesser
+        String interesseStr = "Abstrakt Viden\n" +
+                "Kultur (Generelt)\n" +
+                "Film\n" +
+                "Fotografi\n" +
+                "Håndarbejde\n" +
+                "Arkitektur\n" +
+                "Kunst\n" +
+                "Litteratur\n" +
+                "Tegneserier, tegnefilm, mv.\n" +
+                "Mad og Drikke\n" +
+                "Musik\n" +
+                "Jazz\n" +
+                "Klassisk\n" +
+                "Heavy Metal\n" +
+                "Rock\n" +
+                "Pop\n" +
+                "Elektronisk\n" +
+                "Hiphop / Rap\n" +
+                "Religion\n" +
+                "Sport\n" +
+                "Fodbold\n" +
+                "Håndbold\n" +
+                "Sejlsport\n" +
+                "Computerspil\n" +
+                "E-Sport\n" +
+                "Mennesker\n" +
+                "Antropologi\n" +
+                "Filosofi\n" +
+                "Historie\n" +
+                "Psykologi\n" +
+                "Pædagogik\n" +
+                "Sygepleje\n" +
+                "Natur\n" +
+                "Astronomi\n" +
+                "Biologi\n" +
+                "Botanik\n" +
+                "Evolutionsteori\n" +
+                "Humanbiologi\n" +
+                "Økologi\n" +
+                "Fysik\n" +
+                "Kemi\n" +
+                "Matematik\n" +
+                "Samfund\n" +
+                "Politik\n" +
+                "Sprog\n" +
+                "Jura\n" +
+                "Teknologi\n" +
+                "Transport\n" +
+                "Verden/Geografi\n";
+
+        String[] interesserSplit = interesseStr.split("\\r?\\n");
+        for(String s : interesserSplit){
+            interesser.add(new InterestModel(s));
         }
+
+        java.util.Collections.sort(interesser);
+
         final InterestAdapter iAdapter = new InterestAdapter(this, interesser);
         interestList.setAdapter(iAdapter);
 

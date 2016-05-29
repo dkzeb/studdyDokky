@@ -3,7 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     tools:context=".ActivitiesGridFragment"
-    android:background="#ff00a6">
+    android:background="@color/dokk1_blue">
 
         <GridView
             android:layout_width="wrap_content"

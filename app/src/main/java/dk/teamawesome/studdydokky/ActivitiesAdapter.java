@@ -16,6 +16,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -57,7 +58,11 @@ public class ActivitiesAdapter extends BaseAdapter {
             iv.setImageResource(R.drawable.placeholder);
             Long time = new Long((actD.getStartTime().toString()));
             dv.setText(readableTimeStamp(time));
-            Picasso.with(context).load(actD.getImageUrl()).into(iv);
+            Picasso.with(context)
+                    .load(actD.getImageUrl())
+                    .noFade()
+                    .memoryPolicy(MemoryPolicy.NO_CACHE)
+                    .into(iv);
             iv.setScaleType(ImageView.ScaleType.FIT_XY);
         }
         return convertView;

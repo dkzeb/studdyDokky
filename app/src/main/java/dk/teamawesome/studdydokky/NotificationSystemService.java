@@ -44,7 +44,7 @@ public class NotificationSystemService extends IntentService {
     }
 
     /* Notify on activity */
-    private void BuildActivityNotification(String activityName, String locationName, String activityTime){
+    public void BuildActivityNotification(String activityName, String locationName, String activityTime){
 
         mNotifyMgr = (NotificationManager)
                 this.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -82,7 +82,7 @@ public class NotificationSystemService extends IntentService {
     final Runnable BGRunnable = new Runnable(){
         public void run(){
 
-            BuildActivityNotification("Børneteater", "Scenetrappen", "13:37");
+            //BuildActivityNotification("Børneteater", "Scenetrappen", "13:37");
 
             // run every 15th second :D rekursivt!
             mHandler.postDelayed( BGRunnable, UPDATE_TIME);

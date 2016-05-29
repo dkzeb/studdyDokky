@@ -1,6 +1,6 @@
 package dk.teamawesome.studdydokky;
 
-public class InterestModel {
+public class InterestModel implements Comparable{
 
     private String name;
     private boolean checked;
@@ -22,5 +22,8 @@ public class InterestModel {
         this.checked = checked;
     }
 
-
+    @Override
+    public int compareTo(Object m) {
+        return this.name.compareTo(((InterestModel)m).getName());
+    }
 }

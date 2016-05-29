@@ -1,14 +1,20 @@
 package dk.teamawesome.studdydokky;
 
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTabHost;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.view.MotionEventCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
@@ -16,6 +22,12 @@ import android.view.animation.TranslateAnimation;
 import android.widget.TabHost;
 import android.widget.TabWidget;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.Toolbar;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class MainViewFragment extends AppCompatActivity {
 
@@ -28,6 +40,68 @@ public class MainViewFragment extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
+
+    String DEBUG_TAG = "Touch: ";
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event){
+
+        int action = event.getAction();
+        switch(action & MotionEvent.ACTION_MASK)
+        {
+            case MotionEvent.ACTION_POINTER_DOWN:
+                // multitouch!! - touch down
+                int count = event.getPointerCount(); // Number of 'fingers' in this time
+                Log.d(DEBUG_TAG,"COunt was: "+count);
+                if(count >= 3){
+                    NotificationSystemService nSS = new NotificationSystemService();
+                    // name, place, time}
+                    SimpleDateFormat df = new SimpleDateFormat("HH:mm");
+                    Calendar cal = Calendar.getInstance();
+                    cal.add(Calendar.MINUTE, 15);
+                    String time = df.format(cal.getTime());
+
+                    NotificationManager mNotifyMgr = (NotificationManager)
+                            this.getSystemService(Context.NOTIFICATION_SERVICE);;
+
+                    NotificationCompat.Builder mBuilder =
+                            new NotificationCompat.Builder(this)
+                                    .setSmallIcon(R.drawable.studiedokk1_icon)
+                                    .setContentTitle("Der er aktiviteter i dit område")
+                                    .setContentText("Kl. " + time + " - " + "Børne-teater" + " - " + "Scenetrappen")
+                                    .setAutoCancel(true)
+                                    .setPriority(NotificationCompat.PRIORITY_MAX);
+
+
+                    mNotifyMgr.notify(0, mBuilder.build());
+                }
+                break;
+        }
+
+        //int action = MotionEventCompat.getActionMasked(event);
+
+        switch(action) {
+            case (MotionEvent.ACTION_DOWN) :
+                Log.d(DEBUG_TAG,"Action was DOWN");
+                return true;
+            case (MotionEvent.ACTION_MOVE) :
+                Log.d(DEBUG_TAG,"Action was MOVE");
+                return true;
+            case (MotionEvent.ACTION_UP) :
+                Log.d(DEBUG_TAG,"Action was UP");
+                return true;
+            case (MotionEvent.ACTION_CANCEL) :
+                Log.d(DEBUG_TAG,"Action was CANCEL");
+                return true;
+            case (MotionEvent.ACTION_OUTSIDE) :
+                Log.d(DEBUG_TAG, "Movement occurred outside bounds " +
+                        "of current screen element");
+                return true;
+            default :
+                return super.onTouchEvent(event);
+        }
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -68,6 +142,7 @@ public class MainViewFragment extends AppCompatActivity {
         mTabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             public void onTabChanged(String tabId) {
                 View currentView = mTabHost.getCurrentView();
+
                 if (mTabHost.getCurrentTab() > currentTab) {
                     currentView.setAnimation(inFromRightAnimation());
                 } else {

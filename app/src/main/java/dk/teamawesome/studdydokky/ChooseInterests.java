@@ -3,6 +3,7 @@ package dk.teamawesome.studdydokky;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -52,25 +53,21 @@ public class ChooseInterests extends AppCompatActivity {
                 System.out.println("NonChecked: "+nonChecked);
                 if(!nonChecked){
                     new AlertDialog.Builder(this)
-                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .setIcon(R.drawable.ic_error_24dp)
                             .setTitle("Ingen interesser")
                             .setMessage("Du har ikke valgt nogle interesser,hvilket vil betyde at du får vist alle aktiviteter på DOKK1. Er du sikker på du vil fortsætte?")
                             .setPositiveButton("Gå videre", new DialogInterface.OnClickListener()
                             {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    Intent nextIntent = new Intent(getApplicationContext(), MainViewFragment.class);
-                                    startActivity(nextIntent);
-                                    finish();
+                                    registerInterests();
                                 }
 
                             })
                             .setNegativeButton("Nej", null)
                             .show();
                 } else {
-                    Intent nextIntent = new Intent(getApplicationContext(), MainViewFragment.class);
-                    startActivity(nextIntent);
-                    finish();
+                    registerInterests();
                 }
 
 
@@ -81,6 +78,18 @@ public class ChooseInterests extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
 
         }
+    }
+
+    private void registerInterests(){
+
+        SharedPreferences prefs = getSharedPreferences(getString(R.string.prefs_name), 0);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putBoolean("firstRun", false);
+        editor.commit();
+
+        Intent nextIntent = new Intent(getApplicationContext(), MainViewFragment.class);
+        startActivity(nextIntent);
+        finish();
     }
 
     @Override

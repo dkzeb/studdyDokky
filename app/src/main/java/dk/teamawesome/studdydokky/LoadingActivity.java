@@ -1,5 +1,6 @@
 package dk.teamawesome.studdydokky;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -23,12 +24,15 @@ public class LoadingActivity extends AppCompatActivity {
     private static SharedPreferences prefs;
     private static Context mContext;
 
+    private static Activity activity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
+
+        activity = this;
 
         setContentView(R.layout.loading_layout);
         Log.d(StuddyDokkyMap.TAG, "Loading application...");
@@ -55,5 +59,6 @@ public class LoadingActivity extends AppCompatActivity {
         Intent mainIntent = new Intent(mContext, HelloActivity.class);
         mainIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         mContext.startActivity(mainIntent);
+        activity.finish();
     }
 }

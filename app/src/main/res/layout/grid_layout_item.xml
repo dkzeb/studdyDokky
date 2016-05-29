@@ -3,11 +3,38 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:id="@+id/myImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="125dp"
+        android:src="@drawable/placeholder" />
+
     <TextView
+        android:id="@+id/myImageViewText"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/placeholder"
-        android:text="@string/hello_blank_fragment"
-        />
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:text="Hello"
+        android:textColor="#ffffff"
+        android:background="#7d424242"
+        android:shadowDx="0.0"
+        android:shadowDy="0.0"
+        android:shadowRadius="2.0"
+        android:layout_alignBottom="@+id/myImageView"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/myImageViewDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Goodbye"
+        android:textColor="#ffffff"
+        android:background="#7d424242"
+        android:shadowDx="0.0"
+        android:shadowDy="0.0"
+        android:shadowRadius="2.0"
+        android:gravity="top|left"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
